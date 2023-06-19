@@ -13,3 +13,10 @@ class SHotels(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class SHotelInfo(SHotels):
+    rooms_left: int
+
+    class Config:
+        orm_mode = True

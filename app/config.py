@@ -11,6 +11,14 @@ class Settings(BaseSettings):
     SECRET: str
     TOKEN_ALGORITHM: str
 
+    SMTP_HOST: str
+    SMTP_PORT: int
+    SMTP_USER: str
+    SMTP_PASS: str
+
+    REDIS_HOST: str
+    REDIS_PORT: int
+
     @property
     def get_database_url(self):
         return f'postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}' \

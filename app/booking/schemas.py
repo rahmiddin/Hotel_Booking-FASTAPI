@@ -13,10 +13,6 @@ class SBooking(BaseModel):
     price: int
     total_cost: int
     total_days: int
-    image_id: int
-    name: str
-    description: str
-    services: List[str]
 
     class Config:
         orm_mode = True
