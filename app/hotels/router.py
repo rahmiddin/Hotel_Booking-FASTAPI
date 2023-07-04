@@ -8,6 +8,7 @@ from fastapi_cache.decorator import cache
 
 from app.hotels.dao import HotelsDAO
 from app.hotels.schemas import SHotels, SHotelInfo
+from app.exeptions import DateFromMoreThanDateTo
 
 
 router = APIRouter(
@@ -17,9 +18,9 @@ router = APIRouter(
 
 
 @router.get("/{location}")
-@cache(expire=30)
-async def get_hotels(location: str, date_from: date, date_to: date) -> list[SHotelInfo]:
-    await asyncio.sleep(3)
+async def get_hotels(location: str, date_from: date, date_to: date):
+    if date_from >= date_to:
+        raise DateFromMoreThanDateTo
     hotels = await HotelsDAO.find_all(location, date_from, date_to)
     return hotels
 

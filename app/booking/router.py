@@ -1,6 +1,6 @@
 from datetime import date
 
-from fastapi import APIRouter, Request, Depends, status
+from fastapi import APIRouter, Depends, status
 from pydantic import parse_obj_as
 
 from app.booking.dao import BookingDAO

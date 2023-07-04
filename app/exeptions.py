@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 
 
-class BookingException(HTTPException):
+class MyException(HTTPException):
     status_code = 500
     detail = ""
 
@@ -9,35 +9,40 @@ class BookingException(HTTPException):
         super().__init__(status_code=self.status_code, detail=self.detail)
 
 
-class UserAlreadyExistsException(BookingException):
+class UserAlreadyExistsException(MyException):
     status_code = status.HTTP_409_CONFLICT
     detail = "Пользователь уже существует"
 
 
-class IncorrectEmailOrPasswordException(BookingException):
+class IncorrectEmailOrPasswordException(MyException):
     status_code = status.HTTP_401_UNAUTHORIZED
     detail = "Неверная почта или пароль"
 
 
-class TokenExpiredException(BookingException):
+class TokenExpiredException(MyException):
     status_code = status.HTTP_401_UNAUTHORIZED
     detail = "Срок действия токена истек"
 
 
-class TokenAbsentException(BookingException):
+class TokenAbsentException(MyException):
     status_code = status.HTTP_401_UNAUTHORIZED
     detail = "Токен отсутствует"
 
 
-class IncorrectTokenFormatException(BookingException):
+class IncorrectTokenFormatException(MyException):
     status_code = status.HTTP_401_UNAUTHORIZED
     detail = "Неверный формат токена"
 
 
-class UserIsNotPresentException(BookingException):
+class UserIsNotPresentException(MyException):
     status_code = status.HTTP_401_UNAUTHORIZED
 
 
-class RoomCannotBeBooked(BookingException):
+class RoomCannotBeBooked(MyException):
     status_code = status.HTTP_409_CONFLICT
     detail = "Не осталось свободных номеров"
+
+
+class DateFromMoreThanDateTo(MyException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    detail = "Дата заезда больше чем дата выезда или равна ей"
